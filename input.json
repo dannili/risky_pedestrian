@@ -1,0 +1,30 @@
+[
+    {
+        "day_of_week": 3,
+        "day_of_year": 150,
+        "month": 2,
+        "hour": 12,
+        "neighbourhood_id": 25,
+        "is_major_arterial": 0,
+        "is_dry": 0,
+        "good_light": 0,
+        "good_visibility": 0,
+        "has_traffctl": 0,
+        "is_intersection": 0,
+        "has_rlc": 0
+    },
+    {
+        "day_of_week": 0,
+        "day_of_year": 9,
+        "month": 5,
+        "hour": 22,
+        "neighbourhood_id": 10,
+        "is_major_arterial": 1,
+        "is_dry": 0,
+        "good_light": 0,
+        "good_visibility": 0,
+        "has_traffctl": 1,
+        "is_intersection": 1,
+        "has_rlc": 0
+    }
+]
