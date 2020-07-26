@@ -1,2 +1,2 @@
 # risky_walker
-My first data science project that predict pedestrian involved collisions
+A data science project which builds a machine learning model to predict pedestrian involved collisions.
