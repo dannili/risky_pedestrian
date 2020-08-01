@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html overflow-y='scroll'>
+<head>
+  <meta charset="UTF-8">
+  <title>A Machine Learning Prediction App</title>
+
+</head>
+<body style="background: #90EE90;" overflow-y='scroll'>
+ <div class="home">
+	<h1>Pedestrian Safety Prediction</h1>
+     <!-- Main Input For Receiving Query to our ML -->
+    <form autocomplete="off" action="{{ url_for('predict_accident')}}"method="post">
+      <b>Day of Week:</b>
+      <input type="text" name="day_of_week" placeholder="0-6" required="required" /><br>
+      <b>Day of Year:</b>
+      <input type="text" name="day_of_year" placeholder="1-365" required="required" /><br>
+      <b>Month:</b>
+      <input type="text" name="month" placeholder="1-12" required="required" /><br>
+      <b>Hour:</b>
+      <input type="text" name="hour" placeholder="0-23" required="required" /><br>
+      <b>Neighbourhood (ID):</b>
+      <input type="text" name="neighbourhood_id" placeholder="" required="required" /><br>
+      <b>Is a Major Arterial:</b>
+      <input type="text" name="is_major_arterial" placeholder="1 or 0" required="required" /><br>
+      <b>Rain/Snow:</b>
+      <input type="text" name="is_dry" placeholder="1 or 0" required="required" /><br>
+      <b>Is Daylight:</b>
+      <input type="text" name="good_light" placeholder="1 or 0" required="required" /><br>
+      <b>Is Foggy:</b>
+      <input type="text" name="good_visibility" placeholder="1 or 0" required="required" /><br>
+      <b>Has Traffic Control:</b>
+      <input type="text" name="has_traffctl" placeholder="1 or 0" required="required" /><br>
+      <b>Is an intersection:</b>
+      <input type="text" name="is_intersection" placeholder="1 or 0" required="required" /><br>
+      <b>Has Redlight Camera:</b>
+      <input type="text" name="has_rlc" placeholder="1 or 0" required="required" /><br>
+
+      <br>
+      <br>
+      <button style="background-color: #ADD8E6; box-shadow: 2px 1px teal;" type="submit" class="btn btn-primary btn-block btn-large">Is this a safe location for pedestrian?</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+ </div>
+
+</body>
+</html>
