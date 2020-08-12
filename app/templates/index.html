@@ -3,46 +3,265 @@
 <head>
   <meta charset="UTF-8">
   <title>A Machine Learning Prediction App</title>
-
+  <style>
+    .greenButton {
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    #div {
+      border: 10px dotted black;
+      padding: 10px 45px;
+      background: rgb(255, 255, 0, 0.6);
+      background-clip: padding-box;
+    }
+    input[type=text] {
+      width: 26%;
+      padding: 3px 3px;
+      margin: 8px 2;
+      box-sizing: border-box;
+      border: none;
+      border-bottom: 1px black;
+    }
+    p {
+      padding-top: 0.5px;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-family: sans-serif;
+      font-size: 36px;
+      font-weight: 770;
+    }
+  </style>
 </head>
-<body style="background: #90EE90;" overflow-y='scroll'>
- <div class="home">
+
+<body>
+ <div id="div">
 	<h1>Pedestrian Safety Prediction</h1>
      <!-- Main Input For Receiving Query to our ML -->
     <form autocomplete="off" action="{{ url_for('predict_accident')}}"method="post">
-      <b>Day of Week:</b>
-      <input type="text" name="day_of_week" placeholder="0-6" required="required" /><br>
-      <b>Day of Year:</b>
-      <input type="text" name="day_of_year" placeholder="1-365" required="required" /><br>
-      <b>Month:</b>
-      <input type="text" name="month" placeholder="1-12" required="required" /><br>
-      <b>Hour:</b>
-      <input type="text" name="hour" placeholder="0-23" required="required" /><br>
-      <b>Neighbourhood (ID):</b>
-      <input type="text" name="neighbourhood_id" placeholder="" required="required" /><br>
-      <b>Is a Major Arterial:</b>
-      <input type="text" name="is_major_arterial" placeholder="1 or 0" required="required" /><br>
-      <b>Rain/Snow:</b>
-      <input type="text" name="is_dry" placeholder="1 or 0" required="required" /><br>
-      <b>Is Daylight:</b>
-      <input type="text" name="good_light" placeholder="1 or 0" required="required" /><br>
-      <b>Is Foggy:</b>
-      <input type="text" name="good_visibility" placeholder="1 or 0" required="required" /><br>
-      <b>Has Traffic Control:</b>
-      <input type="text" name="has_traffctl" placeholder="1 or 0" required="required" /><br>
-      <b>Is an intersection:</b>
-      <input type="text" name="is_intersection" placeholder="1 or 0" required="required" /><br>
-      <b>Has Redlight Camera:</b>
-      <input type="text" name="has_rlc" placeholder="1 or 0" required="required" /><br>
+      <p>Date and Time:
+      <input type="text" name="date" placeholder="YYYY-MM-DD-HH" required="required" /></p>
+      <p>Neighbourhood:
+      <select name="neighbourhood_id" id="select a neighbourhood">
+        <option value="129">Agincourt North</option>
+        <option value="128">Agincourt South-Malvern West</option>
+        <option value="20">Alderwood</option>
+        <option value="95">Annex</option>
 
-      <br>
-      <br>
-      <button style="background-color: #ADD8E6; box-shadow: 2px 1px teal;" type="submit" class="btn btn-primary btn-block btn-large">Is this a safe location for pedestrian?</button>
+        <option value="42">Banbury-Don Mills</option>
+        <option value="34">Bathurst Manor</option>
+        <option value="76">Bay Street Corridor</option>
+        <option value="52">Bayview Village</option>
+        <option value="49">Bayview Woods-Steeles</option>
+        <option value="39">Bedford Park-Nortown</option>
+        <option value="112">Beechborough-Greenbrook</option>
+        <option value="127">Bendale</option>
+        <option value="122">Birchcliffe-Cliffside</option>
+        <option value="24">Black Creek</option>
+        <option value="69">Blake-Jones</option>
+        <option value="108">Briar Hill-Belgravia</option>
+        <option value="41">Bridle Path-Sunnybrook-York Mills</option>
+        <option value="57">Broadview North</option>
+        <option value="30">Brookhaven-Amesbury</option>
+
+        <option value="71">Cabbagetown-South St. James Town</option>
+        <option value="109">Caledonia-Fairbank</option>
+        <option value="96">Casa Loma</option>
+        <option value="133">Centennial Scarborough</option>
+        <option value="75">Church-Yonge Corridor</option>
+        <option value="120">Clairlea-Birchmount</option>
+        <option value="33">Clanton Park</option>
+        <option value="123">Cliffcrest</option>
+        <option value="92">Corso Italia-Davenport</option>
+
+        <option value="66">Danforth</option>
+        <option value="59">Danforth - East York</option>
+        <option value="47">Don Valley Village</option>
+        <option value="126">Dorset Park</option>
+        <option value="93">Dovercourt-Wallace Emerson-Junction</option>
+        <option value="26">Downsview-Roding-CFB</option>
+        <option value="83">Dufferin Grove</option>
+
+        <option value="62">East End-Danforth</option>
+        <option value="9">Edenbridge-Humber Valley</option>
+        <option value="138">Eglinton East</option>
+        <option value="5">Elms-Old Rexdale</option>
+        <option value="32">Englemount-Lawrence</option>
+        <option value="11">Eringate-Centennial-West Deane</option>
+        <option value="13">Etobicoke West Mall</option>
+
+        <option value="44">Flemingdon Park</option>
+        <option value="102">Forest Hill North</option>
+        <option value="101">Forest Hill South</option>
+
+        <option value="25">Glenfield-Jane Heights</option>
+        <option value="65">Greenwood-Coxwell</option>
+        <option value="140">Guildwood</option>
+
+        <option value="53">Henry Farm</option>
+        <option value="88">High Park North</option>
+        <option value="87">High Park-Swansea</option>
+        <option value="134">Highland Creek</option>
+        <option value="48">Hillcrest Village</option>
+        <option value="8">Humber Heights-Westmount</option>
+        <option value="21">Humber Summit</option>
+        <option value="22">Humbermede</option>
+        <option value="106">Humewood-Cedarvale</option>
+
+        <option value="125">Ionview</option>
+        <option value="14">Islington-City Centre West</option>
+
+        <option value="90">Junction Area</option>
+
+        <option value="110">Keelesdale-Eglinton West</option>
+        <option value="124">Kennedy Park</option>
+        <option value="78">Kensington-Chinatown</option>
+        <option value="6">Kingsview Village-The Westway</option>
+        <option value="15">Kingsway South</option>
+
+        <option value="117">L'Amoreaux</option>
+        <option value="114">Lambton Baby Point</option>
+        <option value="38">Lansing-Westgate</option>
+        <option value="105">Lawrence Park North</option>
+        <option value="103">Lawrence Park South</option>
+        <option value="56">Leaside Bennington</option>
+        <option value="84">Little Portugal</option>
+        <option value="19">Long Branch</option>
+
+        <option value="132">Malvern</option>
+        <option value="29">Maple Leaf</option>
+        <option value="12">Markland Wood</option>
+        <option value="130">Milliken</option>
+        <option value="17">Mimico (includes Humber Bay Shores)</option>
+        <option value="135">Morningside</option>
+        <option value="73">Moss Park</option>
+        <option value="115">Mount Dennis</option>
+        <option value="2">Mount Olive-Silverstone-Jamestown</option>
+        <option value="99">Mount Pleasant East</option>
+        <option value="104">Mount Pleasant West</option>
+
+        <option value="18">New Toronto</option>
+        <option value="50">Newtonbrook East</option>
+        <option value="36">Newtonbrook West</option>
+        <option value="82">Niagara</option>
+        <option value="68">North Riverdale</option>
+        <option value="74">North St. James Town</option>
+
+        <option value="54">O'Connor-Parkview</option>
+        <option value="121">Oakridge</option>
+        <option value="107">Oakwood Village</option>
+        <option value="58">Old East York</option>
+
+        <option value="80">Palmerston-Little Italy</option>
+        <option value="45">Parkwoods Donalda</option>
+        <option value="23">Pelmo Park-Humberlea</option>
+        <option value="67">Playter Estates-Danforth</option>
+        <option value="46">Pleasant View</option>
+        <option value="10">Princess-Rosethorn</option>
+
+        <option value="72">Regent Park</option>
+        <option value="4">Rexdale-Kipling</option>
+        <option value="111">Rockcliffe-Smythe</option>
+        <option value="86">Roncesvalles</option>
+        <option value="98">Rosedale-Moore Park</option>
+        <option value="131">Rouge</option>
+        <option value="89">Runnymede-Bloor West Village</option>
+        <option value="28">Rustic</option>
+
+        <option value="139">Scarborough Village</option>
+        <option value="85">South Parkdale</option>
+        <option value="70">South Riverdale</option>
+        <option value="40">St. Andrew-Windfields</option>
+        <option value="116">Steeles</option>
+        <option value="16">Stonegate-Queensway</option>
+
+        <option value="118">Tam O'Shanter-Sullivan</option>
+        <option value="61">Taylor-Massey (formerly Crescent Town)</option>
+        <option value="63">The Beaches</option>
+        <option value="3">Thistletown-Beaumond Heights</option>
+        <option value="55">Thorncliffe Park</option>
+        <option value="81">Trinity-Bellwoods</option>
+
+        <option value="79">University</option>
+
+        <option value="43">Victoria Village</option>
+
+        <option value="77">Waterfront Communities-The Island</option>
+        <option value="136">West Hill</option>
+        <option value="1">West Humber-Clairville</option>
+        <option value="35">Westminster-Branson</option>
+        <option value="113">Weston</option>
+        <option value="91">Weston-Pelham Park</option>
+        <option value="119">Wexford-Maryvale</option>
+        <option value="51">Willowdale East</option>
+        <option value="37">Willowdale West</option>
+        <option value="7">Willowridge-Martingrove-Richview</option>
+        <option value="137">Woburn</option>
+        <option value="64">Woodbine Corridor</option>
+        <option value="60">Woodbine-Lumsden</option>
+        <option value="94">Wychwood</option>
+
+        <option value="100">Yonge-Eglinton</option>
+        <option value="97">Yonge-St.Clair</option>
+        <option value="27">York University Heights</option>
+        <option value="31">Yorkdale-Glen Park</option>
+      </select></p>
+
+      <p>
+        <input type="hidden" name="is_major_arterial" value="0" />
+        <input type="checkbox" name="is_major_arterial" value="1" />
+        Major Arterial
+      </p>
+      <p>
+        <input type="hidden" name="is_dry" value="0" />
+        <input type="checkbox" name="is_dry" value="1" />
+        Rain/Snow
+      </p>
+
+      <p>        
+        <input type="hidden" name="good_light" value="0" />
+        <input type="checkbox" name="good_light" value="1" />
+        Good Lighting</p>
+
+      <p>
+        <input type="hidden" name="good_visibility" value="0" />
+        <input type="checkbox" name="good_visibility" value="1" />
+        Foggy
+      </p>
+
+      <p>
+        <input type="hidden" name="has_traffctl" value="0" />
+        <input type="checkbox" name="has_traffctl" value="1" />
+        Traffic Control
+      </p>
+
+      <p>
+        <input type="hidden" name="is_intersection" value="0" />
+        <input type="checkbox" name="is_intersection" value="1" />
+        Intersection</p>
+
+      <p>
+        <input type="hidden" name="has_rlc" value="0" />
+        <input type="checkbox" name="has_rlc" value="1" />
+        Redlight Camera
+      </p>
+
+      <p>Is this a safe location for pedestrian?</p>
+      <button class="greenButton">PREDICT</button>
     </form>
 
-   <br>
-   <br>
-   {{ prediction_text }}
+    <h2>
+      {{ prediction_text }}
+    </h2>
  </div>
 
 </body>
